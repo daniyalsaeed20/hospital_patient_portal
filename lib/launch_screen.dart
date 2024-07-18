@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hospital_patient_portal/ui/home/home_screen.dart';
 
+import 'ui/authentication/ui/auth_home.dart';
 import 'utils/widgets/logo.dart';
 
 class LaunchScreen extends StatelessWidget {
@@ -121,7 +122,7 @@ class _LoaderState extends State<Loader> with SingleTickerProviderStateMixin {
               timer = Timer(const Duration(seconds: 1), () {
                 Navigator.of(context).pushAndRemoveUntil(
                     MaterialPageRoute<void>(
-                      builder: (BuildContext context) => const HomeScreen(
+                      builder: (BuildContext context) =>  const AuthHome(
                       ),
                     ),
                     (Route<dynamic> route) => false);

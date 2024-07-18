@@ -44,7 +44,7 @@ IconButtonThemeData iconButtonThemeData() {
         if (states.contains(WidgetState.pressed)) {
           return buttonDarkColor;
         }
-        return buttonLightColor;
+        return whiteColor;
       }),
       foregroundColor: WidgetStateProperty.all<Color>(Colors.white),
       padding: WidgetStateProperty.all<EdgeInsetsGeometry>(

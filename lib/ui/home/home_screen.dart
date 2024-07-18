@@ -8,6 +8,7 @@ import 'package:hospital_patient_portal/ui/home/lab_results.dart';
 import '../../utils/theme_data.dart';
 import '../../utils/widgets/drawer_cubit/drawer_cubit.dart';
 import '../../utils/widgets/drawer_icon.dart';
+import 'drawer.dart';
 import 'navigation_screen_cubit/navigation_cubit.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -24,15 +25,15 @@ class HomeScreen extends StatelessWidget {
           create: (context) => DrawerCubit(),
         ),
       ],
-      child: const Ui(),
+      child:  Ui(),
     );
   }
 }
 
 class Ui extends StatelessWidget {
-  const Ui({super.key});
+   Ui({super.key});
 
-  final List<Widget> list = const [
+  final List<Widget> list =  [
     Dashboard(),
     HealthSummary(),
     LabResults(),
@@ -75,19 +76,19 @@ class Ui extends StatelessWidget {
           onDrawerChanged: (_) {
             context.read<DrawerCubit>().toggleDrawer();
           },
-          drawer: Drawer(
-            backgroundColor: accentColor.withOpacity(0.5),
-          ),
+          drawer:CustomDrawer(),
           body: Container(
-            decoration: const BoxDecoration(gradient: LinearGradient(
-            colors: [
-              Color(0xFF1976D2), // Primary color
-              Color(0xFF1976D2),
-              Color(0xFF4CAF50), // Secondary color
-            ],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-          ),),
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  Color(0xFF1976D2), // Primary color
+                  Color(0xFF1976D2),
+                  Color(0xFF4CAF50), // Secondary color
+                ],
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+              ),
+            ),
             child: AnimatedSwitcher(
               duration: const Duration(milliseconds: 200),
               transitionBuilder: (child, animation) {
@@ -109,119 +110,117 @@ class Ui extends StatelessWidget {
             ),
           ),
           bottomNavigationBar: BottomAppBar(
-              color: backGroundColor,
-              elevation: 0,
-              height: 80.h,
-              child: SizedBox(
-                height: 180.h,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    InkWell(
-                      splashColor: transparentColor,
-                      child: SizedBox(
-                        width: 70.w,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Icon(
-                              Icons.home,
-                              size: 27.sp,
-                              color: state.index == 0
-                                  ? accentColor
-                                  : buttonDarkColor.withOpacity(0.4),
-                            ),
-                            AnimatedSwitcher(
-                              duration: const Duration(milliseconds: 300),
-                              child: state.index == 0
-                                  ? Text(
-                                      'Home',
-                                      style:
-                                          Theme.of(context).textTheme.bodySmall,
-                                    )
-                                  : SizedBox(
-                                      height: 15.h,
-                                    ),
-                            ),
-                          ],
-                        ),
+            color: backGroundColor,
+            elevation: 0,
+            height: 80.h,
+            child: SizedBox(
+              height: 180.h,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  InkWell(
+                    splashColor: transparentColor,
+                    child: SizedBox(
+                      width: 70.w,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Icon(
+                            Icons.home,
+                            size: 27.sp,
+                            color: state.index == 0
+                                ? accentColor
+                                : buttonDarkColor.withOpacity(0.4),
+                          ),
+                          AnimatedSwitcher(
+                            duration: const Duration(milliseconds: 300),
+                            child: state.index == 0
+                                ? Text(
+                                    'Home',
+                                    style: Theme.of(context).textTheme.bodySmall,
+                                  )
+                                : SizedBox(
+                                    height: 15.h,
+                                  ),
+                          ),
+                        ],
                       ),
-                      onTap: () {
-                        BlocProvider.of<NavigationCubit>(context)
-                            .toggleIndex(index: 0);
-                      },
                     ),
-                    InkWell(
-                      splashColor: transparentColor,
-                      child: SizedBox(
-                        width: 70.w,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Icon(
-                              Icons.contacts,
-                              size: 27.sp,
-                              color: state.index == 1
-                                  ? accentColor
-                                  : buttonDarkColor.withOpacity(0.4),
-                            ),
-                            AnimatedSwitcher(
-                              duration: const Duration(milliseconds: 300),
-                              child: state.index == 1
-                                  ? Text(
-                                      'Contacts',
-                                      style:
-                                          Theme.of(context).textTheme.bodySmall,
-                                    )
-                                  : SizedBox(
-                                      height: 15.h,
-                                    ),
-                            ),
-                          ],
-                        ),
+                    onTap: () {
+                      BlocProvider.of<NavigationCubit>(context)
+                          .toggleIndex(index: 0);
+                    },
+                  ),
+                  InkWell(
+                    splashColor: transparentColor,
+                    child: SizedBox(
+                      width: 70.w,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Icon(
+                            Icons.summarize,
+                            size: 27.sp,
+                            color: state.index == 1
+                                ? accentColor
+                                : buttonDarkColor.withOpacity(0.4),
+                          ),
+                          AnimatedSwitcher(
+                            duration: const Duration(milliseconds: 300),
+                            child: state.index == 1
+                                ? Text(
+                                    'Health',
+                                    style: Theme.of(context).textTheme.bodySmall,
+                                  )
+                                : SizedBox(
+                                    height: 15.h,
+                                  ),
+                          ),
+                        ],
                       ),
-                      onTap: () {
-                        BlocProvider.of<NavigationCubit>(context)
-                            .toggleIndex(index: 1);
-                      },
                     ),
-                    InkWell(
-                      splashColor: transparentColor,
-                      child: SizedBox(
-                        width: 70.w,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Icon(
-                              Icons.history,
-                              size: 27.sp,
-                              color: state.index == 2
-                                  ? accentColor
-                                  : buttonDarkColor.withOpacity(0.4),
-                            ),
-                            AnimatedSwitcher(
-                              duration: const Duration(milliseconds: 300),
-                              child: state.index == 2
-                                  ? Text(
-                                      'History',
-                                      style:
-                                          Theme.of(context).textTheme.bodySmall,
-                                    )
-                                  : SizedBox(
-                                      height: 15.h,
-                                    ),
-                            ),
-                          ],
-                        ),
+                    onTap: () {
+                      BlocProvider.of<NavigationCubit>(context)
+                          .toggleIndex(index: 1);
+                    },
+                  ),
+                  InkWell(
+                    splashColor: transparentColor,
+                    child: SizedBox(
+                      width: 70.w,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Icon(
+                            Icons.medical_information,
+                            size: 27.sp,
+                            color: state.index == 2
+                                ? accentColor
+                                : buttonDarkColor.withOpacity(0.4),
+                          ),
+                          AnimatedSwitcher(
+                            duration: const Duration(milliseconds: 300),
+                            child: state.index == 2
+                                ? Text(
+                                    'History',
+                                    style: Theme.of(context).textTheme.bodySmall,
+                                  )
+                                : SizedBox(
+                                    height: 15.h,
+                                  ),
+                          ),
+                        ],
                       ),
-                      onTap: () {
-                        BlocProvider.of<NavigationCubit>(context)
-                            .toggleIndex(index: 2);
-                      },
                     ),
-                  ],
-                ),
-              )),
+                    onTap: () {
+                      BlocProvider.of<NavigationCubit>(context)
+                          .toggleIndex(index: 2);
+                    },
+                  ),
+                ],
+              ),
+            ),
+          ),
         );
       },
     );
