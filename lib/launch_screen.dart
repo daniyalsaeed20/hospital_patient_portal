@@ -2,9 +2,9 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hospital_patient_portal/ui/home/home_screen.dart';
 
 import 'ui/authentication/ui/auth_home.dart';
+import 'utils/theme_data.dart';
 import 'utils/widgets/logo.dart';
 
 class LaunchScreen extends StatelessWidget {
@@ -17,9 +17,12 @@ class LaunchScreen extends StatelessWidget {
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              Color(0xFF1976D2), // Primary color
-              Color(0xFF1976D2),
-              Color(0xFF4CAF50), // Secondary color
+              whiteColor,
+              whiteColor,
+              whiteColor,
+              whiteColor,
+              whiteColor,
+              redColor,
             ],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
@@ -31,7 +34,9 @@ class LaunchScreen extends StatelessWidget {
               height: 300.h, // Adjusted for simplicity
               child: const Row(),
             ),
-            Logo(size: 150.r,),
+            Logo(
+              size: 150.r,
+            ),
             SizedBox(
               height: 100.h, // Adjusted for simplicity
               child: const Row(),
@@ -105,7 +110,7 @@ class _LoaderState extends State<Loader> with SingleTickerProviderStateMixin {
             height: 2.w,
             width: checker ? 140.w : 0.w,
             decoration: BoxDecoration(
-              color: const Color(0xFFF5F5F5), // Background color
+              color: redColor,
               borderRadius: BorderRadius.circular(
                 90.r,
               ),
@@ -122,8 +127,7 @@ class _LoaderState extends State<Loader> with SingleTickerProviderStateMixin {
               timer = Timer(const Duration(seconds: 1), () {
                 Navigator.of(context).pushAndRemoveUntil(
                     MaterialPageRoute<void>(
-                      builder: (BuildContext context) =>  const AuthHome(
-                      ),
+                      builder: (BuildContext context) => const AuthHome(),
                     ),
                     (Route<dynamic> route) => false);
               });
@@ -136,9 +140,8 @@ class _LoaderState extends State<Loader> with SingleTickerProviderStateMixin {
                 animation: animationController,
                 builder: (context, child) {
                   return Icon(
-                    Icons
-                        .local_hospital, // Changed to a hospital-related icon
-                    color: const Color(0xFFF5F5F5), // Background color
+                    Icons.local_hospital,
+                    color: redColor,
                     size: animationController.value * 30,
                   );
                 }),

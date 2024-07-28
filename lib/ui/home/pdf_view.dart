@@ -36,7 +36,7 @@ class _SimplePageState extends State<SimplePage> {
       appBar: AppBar(
         title: Text(
           'Report',
-          style: Theme.of(context).textTheme.headlineMedium,
+          style: Theme.of(context).textTheme.headlineMedium!.copyWith(color: whiteColor),
         ),
         leading: InkWell(
           child: const Icon(

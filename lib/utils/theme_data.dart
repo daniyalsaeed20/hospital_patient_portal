@@ -4,10 +4,10 @@ import 'package:google_fonts/google_fonts.dart';
 
 ThemeData themeData = ThemeData(
   primarySwatch: const MaterialColor(
-    0xFF1976D2,
+    0xFFD32F2F, // Red color
     _customMaterialColor,
   ),
-  scaffoldBackgroundColor: backGroundColor,
+  scaffoldBackgroundColor: whiteColor,
   appBarTheme: const AppBarTheme(
     color: appBarColor,
     centerTitle: true,
@@ -19,11 +19,11 @@ ThemeData themeData = ThemeData(
 
 TextTheme textTheme() {
   return TextTheme(
-    headlineLarge: _textStyle(24.sp, FontWeight.bold, Colors.white),
-    headlineMedium: _textStyle(22.sp, FontWeight.bold, Colors.white),
-    headlineSmall: _textStyle(20.sp, FontWeight.w600, Colors.white),
-    bodyLarge: _textStyle(16.sp, FontWeight.normal, Colors.black),
-    bodySmall: _textStyle(14.sp, FontWeight.normal, Colors.black),
+    headlineLarge: _textStyle(24.sp, FontWeight.bold, redColor),
+    headlineMedium: _textStyle(22.sp, FontWeight.bold, redColor),
+    headlineSmall: _textStyle(20.sp, FontWeight.w600, redColor),
+    bodyLarge: _textStyle(16.sp, FontWeight.normal, blackColor),
+    bodySmall: _textStyle(14.sp, FontWeight.normal, blackColor),
   );
 }
 
@@ -40,36 +40,36 @@ TextStyle _textStyle(double fontSize, FontWeight fontWeight, Color color) {
 IconButtonThemeData iconButtonThemeData() {
   return IconButtonThemeData(
     style: ButtonStyle(
-      backgroundColor: WidgetStateProperty.resolveWith<Color>((Set<WidgetState> states) {
-        if (states.contains(WidgetState.pressed)) {
+      backgroundColor: MaterialStateProperty.resolveWith<Color>((Set<MaterialState> states) {
+        if (states.contains(MaterialState.pressed)) {
           return buttonDarkColor;
         }
         return whiteColor;
       }),
-      foregroundColor: WidgetStateProperty.all<Color>(Colors.white),
-      padding: WidgetStateProperty.all<EdgeInsetsGeometry>(
+      foregroundColor: MaterialStateProperty.all<Color>(redColor),
+      padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
         EdgeInsets.symmetric(
           vertical: verticalPadding,
           horizontal: horizontalPadding,
         ),
       ),
-      shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
         RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(radius),
         ),
       ),
-      elevation: WidgetStateProperty.all<double>(elevation),
-      overlayColor: WidgetStateProperty.resolveWith<Color>((Set<WidgetState> states) {
-        if (states.contains(WidgetState.pressed)) {
+      elevation: MaterialStateProperty.all<double>(elevation),
+      overlayColor: MaterialStateProperty.resolveWith<Color>((Set<MaterialState> states) {
+        if (states.contains(MaterialState.pressed)) {
           return buttonLightColor.withOpacity(0.2);
         }
         return Colors.transparent;
       }),
-      iconColor: WidgetStateProperty.all<Color>(Colors.white),
-      textStyle: WidgetStateProperty.all<TextStyle>(
+      iconColor: MaterialStateProperty.all<Color>(redColor),
+      textStyle: MaterialStateProperty.all<TextStyle>(
         GoogleFonts.inter(
           textStyle: TextStyle(
-            color: Colors.white,
+            color: redColor,
             fontSize: 16.sp,
             fontWeight: FontWeight.w600,
           ),
@@ -82,27 +82,27 @@ IconButtonThemeData iconButtonThemeData() {
 ElevatedButtonThemeData elevatedButtonThemeData() {
   return ElevatedButtonThemeData(
     style: ButtonStyle(
-      backgroundColor: WidgetStateProperty.resolveWith<Color>((Set<WidgetState> states) {
-        if (states.contains(WidgetState.pressed)) {
+      backgroundColor: MaterialStateProperty.resolveWith<Color>((Set<MaterialState> states) {
+        if (states.contains(MaterialState.pressed)) {
           return buttonDarkColor;
         }
         return buttonLightColor;
       }),
-      foregroundColor: WidgetStateProperty.all<Color>(Colors.white), // Text color
-      padding: WidgetStateProperty.all<EdgeInsetsGeometry>(
+      foregroundColor: MaterialStateProperty.all<Color>(Colors.white), // Text color
+      padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
         EdgeInsets.symmetric(
           vertical: verticalPadding,
           horizontal: horizontalPadding,
         ),
       ),
-      shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
         RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(radius),
         ),
       ),
-      elevation: WidgetStateProperty.all<double>(elevation),
-      iconColor: WidgetStateProperty.all<Color>(Colors.white),
-      textStyle: WidgetStateProperty.all<TextStyle>(
+      elevation: MaterialStateProperty.all<double>(elevation),
+      iconColor: MaterialStateProperty.all<Color>(Colors.white),
+      textStyle: MaterialStateProperty.all<TextStyle>(
         GoogleFonts.inter(
           textStyle: TextStyle(
             color: Colors.white,
@@ -123,13 +123,14 @@ double verticalMargin = 10.h;
 double horizontalMargin = 10.w;
 Size designViewport = const Size(411.4, 867.4);
 
-const Color backGroundColor = Color(0xFFF5F5F5);
-const Color appBarColor = Color(0xFF1976D2);
-const Color accentColor = Color(0xFF4CAF50);
-const Color buttonLightColor = Color(0xFF4CAF50);
-const Color buttonDarkColor = Color(0xFF388E3C);
 const Color whiteColor = Color(0xFFFFFFFF);
 const Color blackColor = Color(0xFF000000);
+const Color redColor = Color(0xFFD32F2F);
+const Color backGroundColor = Color(0xFFF5F5F5);
+const Color appBarColor = Color(0xFFD32F2F); // Red color
+const Color accentColor = Color(0xFFF44336);
+const Color buttonLightColor = Color(0xFFF44336); // Lighter red
+const Color buttonDarkColor = Color(0xFFD32F2F); // Darker red
 const Color transparentColor = Color(0x00000000);
 
 BoxShadow shadow = BoxShadow(
@@ -140,14 +141,14 @@ BoxShadow shadow = BoxShadow(
 );
 
 const Map<int, Color> _customMaterialColor = {
-  50: Color.fromRGBO(25, 118, 210, .1),
-  100: Color.fromRGBO(25, 118, 210, .2),
-  200: Color.fromRGBO(25, 118, 210, .3),
-  300: Color.fromRGBO(25, 118, 210, .4),
-  400: Color.fromRGBO(25, 118, 210, .5),
-  500: Color.fromRGBO(25, 118, 210, .6),
-  600: Color.fromRGBO(25, 118, 210, .7),
-  700: Color.fromRGBO(25, 118, 210, .8),
-  800: Color.fromRGBO(25, 118, 210, .9),
-  900: Color.fromRGBO(25, 118, 210, 1),
+  50: Color.fromRGBO(211, 47, 47, .1),
+  100: Color.fromRGBO(211, 47, 47, .2),
+  200: Color.fromRGBO(211, 47, 47, .3),
+  300: Color.fromRGBO(211, 47, 47, .4),
+  400: Color.fromRGBO(211, 47, 47, .5),
+  500: Color.fromRGBO(211, 47, 47, .6),
+  600: Color.fromRGBO(211, 47, 47, .7),
+  700: Color.fromRGBO(211, 47, 47, .8),
+  800: Color.fromRGBO(211, 47, 47, .9),
+  900: Color.fromRGBO(211, 47, 47, 1),
 };

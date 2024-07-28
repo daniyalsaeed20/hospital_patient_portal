@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hospital_patient_portal/ui/home/dashboard.dart';
 import 'package:hospital_patient_portal/ui/home/health_summary.dart';
 import 'package:hospital_patient_portal/ui/home/lab_results.dart';
+import 'package:hospital_patient_portal/ui/home/doctors_screen.dart'; // Import the new screen
 
 import '../../utils/theme_data.dart';
 import '../../utils/widgets/drawer_cubit/drawer_cubit.dart';
@@ -25,18 +26,19 @@ class HomeScreen extends StatelessWidget {
           create: (context) => DrawerCubit(),
         ),
       ],
-      child:  Ui(),
+      child: Ui(),
     );
   }
 }
 
 class Ui extends StatelessWidget {
-   Ui({super.key});
+  Ui({super.key});
 
-  final List<Widget> list =  [
+  final List<Widget> list = [
     Dashboard(),
     HealthSummary(),
     LabResults(),
+    DoctorsScreen(), // Add the new screen here
   ];
 
   @override
@@ -52,37 +54,43 @@ class Ui extends StatelessWidget {
                   ? Text(
                       'Dashboard',
                       key: const ValueKey<int>(0),
-                      style: Theme.of(context).textTheme.headlineLarge,
+                      style: Theme.of(context).textTheme.headlineLarge!.copyWith(color: whiteColor),
                     )
                   : state.index == 1
                       ? Text(
                           'Health Summary',
                           key: const ValueKey<int>(1),
-                          style: Theme.of(context).textTheme.headlineLarge,
+                          style: Theme.of(context).textTheme.headlineLarge!.copyWith(color: whiteColor),
                         )
                       : state.index == 2
                           ? Text(
                               'Lab Results',
                               key: const ValueKey<int>(2),
-                              style: Theme.of(context).textTheme.headlineLarge,
+                              style: Theme.of(context).textTheme.headlineLarge!.copyWith(color: whiteColor),
                             )
-                          : Text(
-                              'None',
-                              key: const ValueKey<int>(3),
-                              style: Theme.of(context).textTheme.headlineLarge,
-                            ),
+                          : state.index == 3
+                              ? Text(
+                                  'Doctors',
+                                  key: const ValueKey<int>(3),
+                                  style: Theme.of(context).textTheme.headlineLarge!.copyWith(color: whiteColor),
+                                )
+                              : Text(
+                                  'None',
+                                  key: const ValueKey<int>(4),
+                                  style: Theme.of(context).textTheme.headlineLarge!.copyWith(color: whiteColor),
+                                ),
             ),
           ),
           onDrawerChanged: (_) {
             context.read<DrawerCubit>().toggleDrawer();
           },
-          drawer:CustomDrawer(),
+          drawer: CustomDrawer(),
           body: Container(
             decoration: const BoxDecoration(
               gradient: LinearGradient(
                 colors: [
-                  Color(0xFF1976D2), // Primary color
-                  Color(0xFF1976D2),
+                  Color(0xFFD32F2F), // Primary color
+                  Color(0xFFD32F2F),
                   Color(0xFF4CAF50), // Secondary color
                 ],
                 begin: Alignment.topCenter,
@@ -215,6 +223,39 @@ class Ui extends StatelessWidget {
                     onTap: () {
                       BlocProvider.of<NavigationCubit>(context)
                           .toggleIndex(index: 2);
+                    },
+                  ),
+                  InkWell(
+                    splashColor: transparentColor,
+                    child: SizedBox(
+                      width: 70.w,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Icon(
+                            Icons.person,
+                            size: 27.sp,
+                            color: state.index == 3
+                                ? accentColor
+                                : buttonDarkColor.withOpacity(0.4),
+                          ),
+                          AnimatedSwitcher(
+                            duration: const Duration(milliseconds: 300),
+                            child: state.index == 3
+                                ? Text(
+                                    'Doctors',
+                                    style: Theme.of(context).textTheme.bodySmall,
+                                  )
+                                : SizedBox(
+                                    height: 15.h,
+                                  ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    onTap: () {
+                      BlocProvider.of<NavigationCubit>(context)
+                          .toggleIndex(index: 3);
                     },
                   ),
                 ],

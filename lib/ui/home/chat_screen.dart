@@ -12,7 +12,7 @@ class ChatScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           'Chat',
-          style: Theme.of(context).textTheme.headlineMedium,
+          style: Theme.of(context).textTheme.headlineMedium!.copyWith(color: whiteColor),
         ),
         leading: InkWell(
           child: const Icon(

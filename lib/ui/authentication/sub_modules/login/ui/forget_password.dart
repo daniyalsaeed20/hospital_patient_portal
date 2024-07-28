@@ -59,9 +59,10 @@ class ForgotPassword extends StatelessWidget {
                 onPressed: () {
                   Navigator.pop(context); // Navigate back to the login screen
                 },
-                child: const Text(
+                child:  Text(
                   'Back to Login',
-                  style: TextStyle(color: Colors.blueAccent),
+                  style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                      color: Colors.black, fontWeight: FontWeight.bold),
                 ),
               ),
             ],

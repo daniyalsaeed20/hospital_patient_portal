@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hospital_patient_portal/utils/theme_data.dart';
 
 import '../../../../../utils/widgets/logo.dart';
 import '../../../../home/home_screen.dart';
@@ -81,9 +82,10 @@ class LoginScreen extends StatelessWidget {
                     ),
                   );
                 },
-                child: const Text(
+                child: Text(
                   'Forgot Password?',
-                  style: TextStyle(color: Colors.blueAccent),
+                  style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                      color: Colors.black, fontWeight: FontWeight.bold),
                 ),
               ),
             ],
